@@ -15,8 +15,11 @@ If you want to run it for testing in subfolder you can access the app by using b
 http:://host-name/covid_slayer/public
 
 For production environment: (If you want to run it as a main app)
+
 Point the domain root to public folder.
+
 or
+
 Copy the covid_slayer folder contents (except public folder) to outside of webroot directory and copy the public folder directory contents to webroot directory.
 Configure the APP_URL constant.
 
