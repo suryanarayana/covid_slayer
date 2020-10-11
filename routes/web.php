@@ -19,7 +19,7 @@ Auth::routes();
 //->name('home')
 Route::get('/home', 'HomeController@index');
 
-Route::get('/game_time', 'HomeController@configureGameTime');
+Route::get('/game_time', 'HomeController@configureGameTime')->name('game_time');
 
 Route::post('/save_game_time', 'HomeController@saveGameTime');
 

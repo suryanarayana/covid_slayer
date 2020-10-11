@@ -46,7 +46,8 @@ class HomeController extends Controller
         DB::table('users')->where('id', $user_id)->update(['game_time' => $_POST['game_time']]);
 
         $message_info   =   ["success_message"=>"Successfully updated the game time."];
-        
-        return view('game.gametime', ['message_info'=>$message_info]);
+
+        return redirect()->route('game_time');
+        //return view('game.gametime', ['message_info'=>$message_info]);
     }
 }
