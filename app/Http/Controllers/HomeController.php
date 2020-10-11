@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $user_id    =   Auth::id();
-        $games      =   DB::table('games')->where('user_id', 1)->get()->toArray();
+        $games      =   DB::table('games')->where('user_id', $user_id)->get()->toArray();
         return view('home', ['games' => $games]);
     }
 
@@ -45,7 +45,8 @@ class HomeController extends Controller
         $user_id        =   Auth::id();
         DB::table('users')->where('id', $user_id)->update(['game_time' => $_POST['game_time']]);
 
-        $message_info   =   ["success_message"=>"Successfully updated the game time."];   
+        $message_info   =   ["success_message"=>"Successfully updated the game time."];
+        
         return view('game.gametime', ['message_info'=>$message_info]);
     }
 }

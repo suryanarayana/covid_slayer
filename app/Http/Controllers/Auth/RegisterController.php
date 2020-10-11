@@ -66,20 +66,23 @@ class RegisterController extends Controller
      */
     protected function create(array $request)
     {   
-        $file_temp_location =   $request['avatar_image']->path();
-        $file_extension     =   $request['avatar_image']->extension();
-        $file_info          =   $request['avatar_image']->get();
-        $public_dir         =   public_path();
-
+        if(isset($_FILES['avatar_image']['name']) && $_FILES['avatar_image']['name'] != "") {
+            $file_temp_location =   $request['avatar_image']->path();
+            $file_extension     =   $request['avatar_image']->extension();
+            $file_info          =   $request['avatar_image']->get();
+            $public_dir         =   public_path();
+        }
 
         $user               =   User::create([
                                     'name'      =>  $request['name'],
                                     'email'     =>  $request['email'],
                                     'password'  =>  Hash::make($request['password']),
-                                    'avatar'    =>  'noimage.png'
+                                    'avatar'    =>  'no_avatar.png'
                                 ]);
 
-        if($user['id'] != "") {
+        if($user['id'] != "" 
+            && isset($_FILES['avatar_image']['name']) 
+            && $_FILES['avatar_image']['name'] != "") {
             $file_name  =   "avatar_1.".$file_extension;
             move_uploaded_file($file_temp_location, $public_dir . "/user_images/" . $file_name );
             $user->avatar = "avatar_1.".$file_extension;

@@ -84,6 +84,25 @@ function playerGiveUp() {
     clearInterval(const_interval);  //Clear the interval
     clearInterval(const_attack_interval);  //Clear the interval
 
+    var winner  =   "Dragon";
+    $("#game_result").html("Dragon has one the game");
+
+    var input_data  =   {"UserID":user_id, "Winner":winner, "PlayerHealth":player_health_percentage, "DragonHealth":dragon_health_percentage, "Commentary":commentary_info};
+
+    $.ajax({
+        method: "POST",
+        url: 'savegame', 
+        type: "POST",
+        data: input_data,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(app_details) {
+            console.log(app_details);
+        }
+    });
+
     $("#game_result").html("Dragon has one the game");
 }
 

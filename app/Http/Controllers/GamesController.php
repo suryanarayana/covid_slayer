@@ -28,7 +28,7 @@ class GamesController extends Controller
     public function index()
     {
         $user_id    =   Auth::id();
-        $games      =   DB::table('games')->where('user_id', 1)->get();
+        $games      =   DB::table('games')->where('user_id', $user_id)->get();
 
         return view('home', ['games' => $games]);
     }
@@ -62,7 +62,6 @@ class GamesController extends Controller
         $file = fopen(public_path() ."/logs/". $data['UserID'] . '-'. $id . '.log',"w+");
         fwrite($file, json_encode($data['Commentary']));
         fclose($file);
-
     
         if($game_info == 1) {
             return "Game saved successfully";
